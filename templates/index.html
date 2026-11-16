@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>edu.IA — Lycée de Côte d'Ivoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="mode-banner" id="modeBanner"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg> Pour activer Akwaba (IA), lance le serveur : <strong>python app.py</strong> puis ouvre <strong>http://localhost:5000</strong></div>
+
+<!-- ICONS (sprite sheet, hidden) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></symbol>
+<symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><path d="M9 17h6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"/><path d="M10 11v6M14 11v6"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1 4.4A8 8 0 0 1 21 12Z"/></symbol>
+<symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 7c-1.7-1.3-4-2-7-2v13c3 0 5.3.7 7 2 1.7-1.3 4-2 7-2V5c-3 0-5.3.7-7 2Z"/><path d="M12 7v13"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4L17 4l3 3L8 19l-4 1Z"/><path d="M14 7l3 3"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-chevdown" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="i-wand" viewBox="0 0 24 24"><path d="M5 19 19 5"/><path d="M19 9V5h-4M5 5v4M5 19h4M19 19v-4"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-paperplane" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></symbol>
+<symbol id="i-mic-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M9 9v2a3 3 0 0 0 4.6 2.5M15 9V6a3 3 0 0 0-5.6-1.5"/><path d="M5 11a7 7 0 0 0 10.3 6.1M19 11a7 7 0 0 1-1.1 3.7"/><path d="M12 18v3M9 21h6"/></symbol>
+<symbol id="i-paperclip" viewBox="0 0 24 24"><path d="M21 11 12.5 19.5a4.5 4.5 0 0 1-6.36-6.36L14.5 4.8a3 3 0 0 1 4.24 4.24L10.4 17.4a1.5 1.5 0 0 1-2.12-2.12L16 7.6"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24"><path d="M7 3h7l4 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4M9 13h6M9 16h6M9 10h2"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-2-2-5 5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-9"/></symbol>
+<symbol id="i-checkbadge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></symbol>
+<symbol id="i-backpack" viewBox="0 0 24 24"><path d="M8 8V6a4 4 0 0 1 8 0v2"/><path d="M6 8h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Z"/><path d="M9 12h6M9 16h6M10 8v3M14 8v3"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></symbol>
+<symbol id="i-sparkle-id" viewBox="0 0 24 24"><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/><circle cx="12" cy="12" r="3.5"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+<symbol id="i-flag-ci" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M9 5v14M15 5v14"/></symbol>
+<symbol id="i-grad" viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></symbol>
+<symbol id="i-divide" viewBox="0 0 24 24"><circle cx="12" cy="7" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.4" fill="currentColor" stroke="none"/><path d="M5 12h14"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6.5L5.5 18a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9.5V3"/><path d="M8.5 14h7"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4c-9 1-14 5-15 14 9-1 13-5 15-14Z"/><path d="M5 18C7 13 10 10 16 7"/></symbol>
+<symbol id="i-quill" viewBox="0 0 24 24"><path d="M4 20s2-9 8-13 9-3 9-3-1 5-5 9-9 7-12 7Z"/><path d="M4 20l4-4"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M6 4h12v13a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V4Z"/><path d="M6 4a2 2 0 1 0 0 4M18 17a2 2 0 1 0 0 4h-3"/><path d="M9 9h6M9 12h6"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9Z"/></symbol>
+<symbol id="i-uk" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 5l18 14M21 5 3 19"/><path d="M12 5v14M3 12h18"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3c-1.5.3-2.5 1.6-2.5 3.2 0 1 .4 1.8 1 2.4-.6.6-1 1.5-1 2.4 0 1.7 1.3 3 3 3 .3 1.3 1.5 2 2.7 2H12V4H9Z"/><path d="M15 4a3 3 0 0 1 3 3c1.5.3 2.5 1.6 2.5 3.2 0 1-.4 1.8-1 2.4.6.6 1 1.5 1 2.4 0 1.7-1.3 3-3 3-.3 1.3-1.5 2-2.7 2H12V4h3Z"/></symbol>
+<symbol id="i-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(120 12 12)"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3 11.2c.6.3.8.8.8 1.3v.5h4.4v-.5c0-.5.2-1 .8-1.3A6 6 0 0 0 12 3Z"/></symbol>
+</defs>
+</svg>
+
+<!-- GUEST MODAL -->
+<div class="modal-overlay hidden" id="guestModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <svg class="ico"><use href="#i-lock"/></svg>
+      <h3>Crée ton compte pour continuer</h3>
+      <p>L'IA Akwaba est réservée aux élèves inscrits. C'est gratuit !</p>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab on" id="modalTabReg" onclick="switchModalTab('register')">S'inscrire</div>
+      <div class="auth-tab" id="modalTabLog" onclick="switchModalTab('login')">Se connecter</div>
+    </div>
+    <div class="modal-body" id="modalRegBody">
+      <div class="field"><label>Prénom &amp; Nom</label><input id="mRegName" type="text" placeholder="ex : Konan Aya"/></div>
+      <div class="field"><label>Identifiant (login)</label><input id="mRegId" type="text" placeholder="ex : konan.aya"/></div>
+      <div class="field"><label>Mot de passe</label><input id="mRegPwd" type="password" placeholder="Minimum 4 caractères"/></div>
+      <div class="login-err" id="mRegErr"></div>
+      <div class="login-ok" id="mRegOk"></div>
+      <button class="btn btn-orange" style="width:100%" onclick="doModalRegister()">Créer mon compte <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left" transform="rotate(180 12 12)"/></svg></button>
+    </div>
+    <div class="modal-body" id="modalLogBody" style="display:none">
+      <div class="field"><label>Identifiant</label><input id="mLogId" type="text" placeholder="ex : konan.aya"/></div>
+      <div class="field"><label>Mot de passe</label><input id="mLogPwd" type="password" placeholder="••••••••"/></div>
+      <div class="login-err" id="mLogErr"></div>
+      <button class="btn btn-orange" style="width:100%" onclick="doModalLogin()">Me connecter <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left" transform="rotate(180 12 12)"/></svg></button>
+    </div>
+    <div class="modal-foot">
+      <a onclick="closeGuestModal()" style="color:var(--ink-soft);font-size:.82rem;cursor:pointer">Annuler — continuer à lire sans IA</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand" onclick="go('accueil')">
+      <span class="mark">e</span>
+      <span>edu.IA<small>Lycée · Côte d'Ivoire</small></span>
+    </div>
+    <div class="crumbs" id="crumbs"></div>
+    <div class="topbar-actions" id="topbarActions"></div>
+  </div>
+</div>
+
+<!-- ============ VUE ACCUEIL ============ -->
+<section class="view active" id="view-accueil">
+
+  <!-- HERO -->
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-badge">
+        <svg class="ico" viewBox="0 0 24 24"><use href="#i-flag-ci"/></svg>
+        Programme officiel MENA — Lycée de Côte d'Ivoire
+      </div>
+      <h1 class="display">Apprends mieux.<br><em>Comprends plus vite.</em></h1>
+      <p>Cours complets du lycée ivoirien (2nde, 1ère, Tle) avec un assistant IA disponible 24h/24, en français, gratuitement.</p>
+      <div class="hero-btns">
+        <button class="btn btn-orange" onclick="go('connexion')">
+          Commencer gratuitement
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left" transform="rotate(180 12 12)"/></svg>
+        </button>
+        <button class="btn btn-ghost" onclick="enterAsGuest()">Essayer en invité</button>
+      </div>
+      <div class="hero-flags">
+        <div class="hero-stat"><strong>3 classes</strong><small>2nde · 1ère · Terminale</small></div>
+        <div class="hero-stat"><strong>3 séries</strong><small>A · C · D</small></div>
+        <div class="hero-stat"><strong>8 matières</strong><small>Au programme</small></div>
+        <div class="hero-stat"><strong>Akwaba IA</strong><small>Tuteur 24h/24</small></div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg class="ico" viewBox="0 0 24 24"><use href="#i-wand"/></svg> En 3 étapes</span>
+        <h2 class="display">Comment ça marche</h2>
+        <p>De l'inscription à ta première leçon, en moins d'une minute.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h4>Choisis ta classe</h4>
+          <p>2nde, 1ère ou Terminale, puis ta série (A, C ou D) — le contenu s'adapte automatiquement à ton programme.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h4>Sélectionne une matière</h4>
+          <p>Maths, Physique-Chimie, SVT, Français, Histoire-Géo, Anglais ou Philosophie — tous les cours sont là.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h4>Apprends avec Akwaba</h4>
+          <p>Lis le cours, fais les exercices, et demande de l'aide à ton tuteur IA à tout moment, sans limite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONCTIONNALITÉS -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg class="ico" viewBox="0 0 24 24"><use href="#i-sparkle"/></svg> Fonctionnalités</span>
+        <h2 class="display">Tout ce qu'il faut pour réussir</h2>
+        <p>Une plateforme pensée pour les élèves ivoiriens, simple à utiliser et entièrement gratuite.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-book-open"/></svg></div>
+          <h4>Cours complets &amp; structurés</h4>
+          <p>Toutes les notions clés du programme officiel MENA, organisées par chapitre, avec définitions, exemples et points essentiels à retenir.</p>
+        </div>
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-pencil"/></svg></div>
+          <h4>Exercices corrigés</h4>
+          <p>Des exercices pour t'entraîner après chaque leçon, avec la possibilité d'en générer de nouveaux à volonté grâce à l'IA.</p>
+        </div>
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-bot"/></svg></div>
+          <h4>Tuteur IA — Akwaba</h4>
+          <p>Pose toutes tes questions à Akwaba : il t'explique pas à pas, sans jamais te donner la réponse toute faite, pour que tu comprennes vraiment.</p>
+        </div>
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-paperclip"/></svg></div>
+          <h4>Photo de ton exercice</h4>
+          <p>Bloqué sur un exercice du cahier ? Prends-le en photo et joins-la directement au chat — Akwaba t'aide à le résoudre.</p>
+        </div>
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-mic"/></svg></div>
+          <h4>Question à la voix</h4>
+          <p>Pas envie d'écrire ? Parle directement à Akwaba grâce au micro intégré au chat — pratique sur téléphone.</p>
+        </div>
+        <div class="feat-card">
+          <div class="fc-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-history"/></svg></div>
+          <h4>Historique sauvegardé</h4>
+          <p>Toutes tes conversations avec Akwaba sont conservées. Retrouve une explication d'hier, ou reprends là où tu t'étais arrêté.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATIÈRES AU PROGRAMME -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg class="ico" viewBox="0 0 24 24"><use href="#i-grad"/></svg> Programme</span>
+        <h2 class="display">Les matières disponibles</h2>
+        <p>Du tronc commun aux matières de spécialité, selon ta série — tout le programme, rien de superflu.</p>
+      </div>
+      <div class="subj-preview-grid">
+        <span class="subj-pill" style="--c:var(--orange)"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-divide"/></svg></span>Mathématiques</span>
+        <span class="subj-pill" style="--c:#7048e8"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-flask"/></svg></span>Physique-Chimie</span>
+        <span class="subj-pill" style="--c:#2b8a3e"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-leaf"/></svg></span>SVT</span>
+        <span class="subj-pill" style="--c:var(--green)"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-quill"/></svg></span>Français</span>
+        <span class="subj-pill" style="--c:#1864ab"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-scroll"/></svg></span>Histoire</span>
+        <span class="subj-pill" style="--c:#1864ab"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-globe"/></svg></span>Géographie</span>
+        <span class="subj-pill" style="--c:#c2255c"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-uk"/></svg></span>Anglais</span>
+        <span class="subj-pill" style="--c:#5f3dc4"><span class="sp-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-brain"/></svg></span>Philosophie</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg class="ico" viewBox="0 0 24 24"><use href="#i-sparkle"/></svg> Témoignages</span>
+        <h2 class="display">Ce qu'en disent les élèves</h2>
+        <p>Des lycéens de tout le pays qui apprennent déjà avec edu.IA.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>Akwaba m'a aidé à comprendre les dérivées en Terminale C. Il explique mieux que certains profs, et je peux relire à n'importe quelle heure.</p>
+          <div class="testi-author">
+            <div class="testi-av">K</div>
+            <div><strong>Kobenan Aristide</strong><span>Terminale C — Bouaké</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>J'envoie les photos de mes exercices de chimie directement au chat. Akwaba me guide étape par étape sans me donner la réponse — c'est exactement ce qu'il me faut.</p>
+          <div class="testi-author">
+            <div class="testi-av">A</div>
+            <div><strong>Adjoua Bénédicte</strong><span>1ère D — Abidjan</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>Les cours de Français et les exercices corrigés m'ont vraiment aidé à préparer mon bac. L'historique me permet de retrouver les explications facilement.</p>
+          <div class="testi-author">
+            <div class="testi-av">D</div>
+            <div><strong>Diabaté Moussa</strong><span>Terminale A — Korhogo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="about-band">
+    <div class="wrap section">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow" style="display:inline-flex;margin-bottom:14px"><svg class="ico" viewBox="0 0 24 24"><use href="#i-checkbadge"/></svg> Pourquoi edu.IA</span>
+          <h2 class="display">Conçu pour les lycéens de Côte d'Ivoire</h2>
+          <p>edu.IA est une plateforme éducative , basée sur le programme officiel du Ministère de l'Éducation Nationale et de l'Alphabétisation . Le contenu de chaque leçon respecte la progression du curriculum, avec des exemples ancrés dans le quotidien ivoirien.</p>
+          <ul class="about-list">
+            <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check"/></svg> Contenu conforme au programme MENA</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check"/></svg> Tuteur IA Akwaba disponible à toute heure, en français</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check"/></svg> Accessible en mode invité, sans inscription obligatoire</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check"/></svg> Fonctionne sur téléphone comme sur ordinateur</li>
+            <li><svg class="ico" viewBox="0 0 24 24"><use href="#i-check"/></svg> Toujours gratuit pour les élèves — sans publicité</li>
+          </ul>
+        </div>
+        <div class="about-panel">
+          <div class="about-stat">
+            <div class="as-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-book-open"/></svg></div>
+            <div><strong>3 classes</strong><span>2nde, 1ère, Terminale</span></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-grad"/></svg></div>
+            <div><strong>3 séries</strong><span>A (Littéraire), C &amp; D (Scientifique)</span></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-bot"/></svg></div>
+            <div><strong>Akwaba IA</strong><span>Tuteur IA, 24h/24 et 7j/7</span></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-paperclip"/></svg></div>
+            <div><strong>Photo + Voix</strong><span>Envoie un exercice ou parle directement</span></div>
+          </div>
+          <div class="about-stat">
+            <div class="as-ico"><svg class="ico" viewBox="0 0 24 24"><use href="#i-history"/></svg></div>
+            <div><strong>Historique complet</strong><span>Retrouve toutes tes conversations</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-band wrap">
+    <div class="cta-box">
+      <h2 class="display">Prêt à progresser ?</h2>
+      <p>Rejoins les élèves qui apprennent déjà avec edu.IA — c'est gratuit, sans engagement, et ça prend une minute.</p>
+      <div class="hero-btns">
+        <button class="btn" style="background:#fff;color:var(--orange);box-shadow:0 6px 18px rgba(0,0,0,.15)" onclick="go('connexion')">
+          Créer mon compte gratuit
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left" transform="rotate(180 12 12)"/></svg>
+        </button>
+        <button class="btn btn-ghost" style="border-color:rgba(255,255,255,.5);color:#fff" onclick="enterAsGuest()">Essayer en invité</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="mark">e</div>
+          <p style="font-weight:800;font-size:1rem;margin-bottom:6px">edu.IA</p>
+          <p>La plateforme d'apprentissage gratuite pour les lycéens de Côte d'Ivoire, avec un tuteur IA disponible 24h/24.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Niveaux</h5>
+          <ul>
+            <li><a href="#">Seconde (2nde)</a></li>
+            <li><a href="#">Première (1ère)</a></li>
+            <li><a href="#">Terminale (Tle)</a></li>
+            <li><a href="#">Série A · C · D</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Matières</h5>
+          <ul>
+            <li><a href="#">Mathématiques</a></li>
+            <li><a href="#">Physique-Chimie</a></li>
+            <li><a href="#">SVT</a></li>
+            <li><a href="#">Français &amp; Philosophie</a></li>
+            <li><a href="#">Histoire-Géo &amp; Anglais</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Plateforme</h5>
+          <ul>
+            <li><a href="#">Comment ça marche</a></li>
+            <li><a href="#">Tuteur Akwaba IA</a></li>
+            <li><a href="#">Mode invité</a></li>
+            <li><a href="#">Créer un compte</a></li>
+            <li><a href="#">Nous contacter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 edu.IA — Plateforme éducative  pour le lycée ivoirien.</p>
+        
+      </div>
+    </div>
+  </footer>
+
+</section><!-- fin view-accueil -->
+
+<!-- ============ VUE CONNEXION ============ -->
+<section class="view" id="view-connexion">
+  <div class="page wrap">
+    <div class="page-head">
+      <span class="eyebrow"><svg class="ico" viewBox="0 0 24 24"><use href="#i-grad"/></svg> Espace élève</span>
+      <h1 class="display">Bienvenue !</h1>
+      <p>Connecte-toi ou crée un compte pour accéder à tes cours et à ton tuteur IA.</p>
+    </div>
+    <div class="login-card">
+      <div class="auth-tabs">
+        <div class="auth-tab on" id="tabLogin" onclick="switchAuthTab('login')">Se connecter</div>
+        <div class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">S'inscrire</div>
+      </div>
+      <div id="panelLogin">
+        <div class="login-top"><div class="ava"><svg class="ico" viewBox="0 0 24 24"><use href="#i-backpack"/></svg></div><h2>Connexion élève</h2><p>Entre tes identifiants pour continuer.</p></div>
+        <div class="login-body">
+          <div class="field"><label for="loginId">Identifiant</label><input id="loginId" type="text" placeholder="ex : konan.aya" autocomplete="off"/></div>
+          <div class="field"><label for="loginPwd">Mot de passe</label><input id="loginPwd" type="password" placeholder="••••••••"/></div>
+          <div class="login-err" id="loginErr"></div>
+          <button class="btn btn-orange" id="loginBtn" style="width:100%">Se connecter</button>
+          <div class="hint">Pas encore de compte ? Clique sur «S'inscrire» ci-dessus.</div>
+        </div>
+        <div class="login-foot"><a onclick="enterAsGuest()">Continuer sans compte (invité) →</a></div>
+      </div>
+      <div id="panelRegister" style="display:none">
+        <div class="login-top"><div class="ava"><svg class="ico" viewBox="0 0 24 24"><use href="#i-sparkle-id"/></svg></div><h2>Créer un compte</h2><p>Inscris-toi gratuitement en quelques secondes.</p></div>
+        <div class="login-body">
+          <div class="field"><label for="regName">Prénom &amp; Nom</label><input id="regName" type="text" placeholder="ex : Konan Aya"/></div>
+          <div class="field"><label for="regId">Identifiant (login)</label><input id="regId" type="text" placeholder="ex : konan.aya"/></div>
+          <div class="field"><label for="regPwd">Mot de passe</label><input id="regPwd" type="password" placeholder="Minimum 4 caractères"/></div>
+          <div class="login-err" id="regErr"></div>
+          <div class="login-ok" id="regOk"></div>
+          <button class="btn btn-orange" id="regBtn" style="width:100%">Créer mon compte <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left" transform="rotate(180 12 12)"/></svg></button>
+        </div>
+        <div class="login-foot"><a onclick="enterAsGuest()">Continuer sans compte (invité) →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VUE NIVEAU ============ -->
+<section class="view" id="view-niveau">
+  <div class="page wrap">
+    <span class="back-link" onclick="go('connexion')"><svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left"/></svg> Accueil</span>
+    <div class="step-dots"><i class="on"></i><i></i><i></i></div>
+    <div class="page-head">
+      <span class="eyebrow">Étape 1 / 3 · Ta classe</span>
+      <h1 class="display">Choisis ton niveau</h1>
+      <p>Cours et assistant s'adapteront à ta classe.</p>
+    </div>
+    <div class="levels" id="levelsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ VUE MATIERE ============ -->
+<section class="view" id="view-matiere">
+  <div class="page wrap">
+    <span class="back-link" onclick="go('niveau')"><svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left"/></svg> Changer de niveau</span>
+    <div class="step-dots"><i></i><i class="on"></i><i></i></div>
+    <div class="page-head">
+      <span class="eyebrow">Étape 2 / 3 · La matière</span>
+      <h1 class="display">Choisis une matière</h1>
+      <p id="matiereSub">Sélectionne la matière à étudier.</p>
+    </div>
+    <div id="serieSelector" style="display:none;text-align:center;margin-bottom:28px"></div>
+    <div class="subjects" id="subjectsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ VUE COURS (workspace) ============ -->
+<section class="view" id="view-cours">
+  <div class="workspace" id="workspace">
+
+    <div class="activity-rail">
+      <button class="rail-btn" id="railHist" onclick="toggleHistory()" title="Historique des sessions">
+        <svg class="ico rb-ico" viewBox="0 0 24 24"><use href="#i-history"/></svg>
+        <span class="rb-badge" id="railHistBadge" style="display:none">0</span>
+        <span class="rb-label">Historique</span>
+      </button>
+      <button class="rail-btn" id="railAI" onclick="toggleAI()" title="Akwaba — Tuteur IA">
+        <svg class="ico rb-ico" viewBox="0 0 24 24"><use href="#i-bot"/></svg>
+        <span class="rb-label">Akwaba</span>
+      </button>
+    </div>
+
+    <aside class="history-sidebar" id="historySidebar">
+      <div class="hist-top">
+        <h4><svg class="ico" viewBox="0 0 24 24"><use href="#i-history"/></svg> Historique</h4>
+        <button class="hist-close" onclick="toggleHistory()"><svg class="ico" viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="hist-scroll" id="historyList"></div>
+      <div class="hist-footer">
+        <button class="hist-clear" onclick="clearHistory()"><svg class="ico" viewBox="0 0 24 24"><use href="#i-trash"/></svg> Effacer l'historique</button>
+      </div>
+    </aside>
+
+    <main class="course-main" id="courseMain">
+      <span class="back-link" onclick="go('matiere')"><svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-left"/></svg> Changer de matière</span>
+      <div class="matiere-banner" id="matiereBanner"></div>
+      <div class="tabs">
+        <button class="tab on" data-tab="cours" onclick="switchTab('cours')"><svg class="ico" viewBox="0 0 24 24"><use href="#i-book-open"/></svg> Cours au programme</button>
+        <button class="tab" data-tab="exos" onclick="switchTab('exos')"><svg class="ico" viewBox="0 0 24 24"><use href="#i-pencil"/></svg> Exercices</button>
+      </div>
+      <div id="chaptersZone"></div>
+    </main>
+
+    <div class="resizer" id="resizer" title="Glisser pour redimensionner le panneau IA"></div>
+
+    <section class="ai-panel" id="aiPanel">
+      <div class="chat-top">
+        <div class="bot"><svg class="ico" viewBox="0 0 24 24"><use href="#i-bot"/></svg></div>
+        <div><h3>Akwaba — Tuteur IA</h3><p>Pose tes questions sur les notions</p></div>
+        <button class="chat-top-close" onclick="toggleAI()"><svg class="ico" viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="chat-ctx" id="chatCtx"><svg class="ico" viewBox="0 0 24 24"><use href="#i-book-open"/></svg>&nbsp;Contexte : —</div>
+      <div class="chat-body" id="chatBody"></div>
+      <div class="pending-files" id="pendingFiles"></div>
+      <div class="chat-sug" id="chatSug"></div>
+      <div class="voice-status" id="voiceStatus" role="status" aria-live="polite">
+        <span class="vs-dot"></span><span id="voiceStatusText">Je t'écoute…</span>
+        <button type="button" id="voiceStopBtn">Arrêter la voix</button>
+      </div>
+      <div class="chat-input">
+        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp"/>
+        <button class="icon-btn" id="attachBtn" title="Ajouter un fichier" aria-label="Ajouter un fichier">
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-plus"/></svg>
+        </button>
+        <input id="chatInput" type="text" placeholder="Je ne comprends pas…" autocomplete="off"/>
+        <button class="icon-btn" id="micBtn" title="Parler à Akwaba (il te répond à voix haute)" aria-label="Conversation vocale avec Akwaba">
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-mic"/></svg>
+        </button>
+        <button class="send-btn" id="chatSend" aria-label="Envoyer">
+          <svg class="ico" viewBox="0 0 24 24"><use href="#i-paperplane"/></svg>
+        </button>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+</body>
+</html>
